@@ -1,3 +1,4 @@
+.trainer-card,
 .pokemon-card {
   border: .5em solid $yellow;
   border-radius: 4px;
@@ -12,6 +13,9 @@
   }
   img {
     width: 75%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 1em;
   }
 
   &:hover {

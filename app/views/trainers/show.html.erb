@@ -1,0 +1,10 @@
+<div class="container-fluid my-3">
+  <%= link_to "← Trainers", trainers_path %>
+  <h1 class="my-3"><%= @trainer.name %> is going to catch 'em all!</h1>
+  <div class="grid-two">
+    <div class="left-content">
+      <%= render "trainer", trainer: @trainer %>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+<div class="container-fluid my-3">
+  <%= link_to "← Pokedex", :back %>
+  <h1>Let's Get Training</h1>
+  <div class="trainers">
+    <% @trainers.each do |trainer| %>
+      <%= link_to trainer_path(trainer), class: "text-decoration-none" do %>
+        <%= render "trainer", trainer: trainer %>
+      <% end %>
+    <% end %>
+    
+  </div>
+</div>

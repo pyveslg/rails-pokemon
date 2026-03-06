@@ -1,5 +1,6 @@
 <div class="container">
   <h1 class="my-3">Pokedex</h1>
+  <%= link_to "Trainers", trainers_path, class: "mb-3 d-inline-block" %>
   <div class="pokemon-grid">
     <% @pokemons.each do |pokemon| %>
       <%= link_to pokemon_path(pokemon), class: "text-decoration-none" do %>
