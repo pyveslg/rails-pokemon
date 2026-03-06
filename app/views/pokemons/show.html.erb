@@ -11,6 +11,15 @@
         <p><%= @pokemon.element_type %></p>
       </div>
     </div>
+    <div class="right-content">
+      <%= simple_form_for [@pokemon, Pokeball.new ] do |f| %>
+        <%= f.association :trainer %>
+        <%= f.input :location %>
+        <%= f.input :caught_on %>
+        <%= f.submit "Catch!", class: "btn btn-primary" %>
+      <% end %>
+      
+    </div>
   </div>
 
 </div>
