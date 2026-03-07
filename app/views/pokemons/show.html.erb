@@ -1,7 +1,7 @@
 <div class="container-fluid my-3">
   <div class="grid-two">
     <div class="left-content">
-      <%= link_to "← Pokedex", :back %>
+      <%= link_to "← Pokedex", root_path %>
       <p class="my-3">
         Vous entendez un bruit. Un pokemon apparaît dans les hautes herbes...
       </p>
@@ -11,7 +11,7 @@
         <p><%= @pokemon.element_type %></p>
       </div>
     </div>
-    <div class="right-content">
+    <div class="right-content d-flex align-items-center justify-content-center">
       
       <% if @pokemon.pokeball.nil? %>
         <%= simple_form_for [@pokemon, Pokeball.new ] do |f| %>
@@ -21,7 +21,7 @@
           <%= f.submit "Catch!", class: "btn btn-primary" %>
         <% end %>
       <% else %>
-        <p><%= @pokemon.name %> has already been caught by <%= link_to @pokemon.trainer.name, trainer_path(@pokemon.trainer) %></p>
+        <p><%= @pokemon.name %> a déjà été attrapé par <%= link_to @pokemon.trainer.name, trainer_path(@pokemon.trainer) %></p>
       <% end %>
       
       

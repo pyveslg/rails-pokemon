@@ -26,12 +26,28 @@ brock = Trainer.create(name: "Pierre", age: 22)
 brock.photo.attach(io: URI.parse('https://upload.wikimedia.org/wikipedia/en/7/71/DP-Brock.png').open, filename: 'brock.png', content_type: 'image/png')
 puts "Brock is on the scene!"
 
-puts 'Creating pokemons...'
+puts 'Fetching Type translations for pokemons...'
+# Optimisation: on va chercher tous les types pour les avoir en français (et nous éviter de faire un call à l'api pour chaque pokemon !)
+type_translations = {}
+types_response = JSON.parse(URI.parse('https://pokeapi.co/api/v2/type?limit=30').open.read)
+types_response['results'].each do |t|
+  type_info = JSON.parse(URI.parse(t['url']).open.read)
+  fr_type_name = type_info['names'].find { |n| n['language']['name'] == 'fr' }['name']
+  type_translations[t['name']] = fr_type_name
+end
+
+puts 'Creating pokemons... (with French names !)'
 response = URI.parse('https://pokeapi.co/api/v2/pokemon?limit=50').open.read
 results = JSON.parse(response)['results']
 results.each do |result|
   info = JSON.parse(URI.parse(result['url']).open.read)
-  pokemon = Pokemon.create(name: info['name'].capitalize, element_type: info['types'].first['type']['name'])
+  species_info = JSON.parse(URI.parse(info['species']['url']).open.read)
+  french_name = species_info['names'].find { |n| n['language']['name'] == 'fr' }['name']
+
+  english_type = info['types'].first['type']['name']
+  french_type = type_translations[english_type]
+
+  pokemon = Pokemon.create(name: french_name.capitalize, element_type: french_type)
   pokemon.photo.attach(io: URI.parse(info['sprites']['front_default']).open, filename: "#{info['name']}.png", content_type: 'image/png')
   puts "Screeahhhhh! #{pokemon.name} created!"
 end

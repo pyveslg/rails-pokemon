@@ -1,0 +1,10 @@
+<div class="container-fluid my-3">
+  <%= link_to "← Dresseurs", trainers_path %>
+  <%= simple_form_for @trainer do |f| %>
+    <%= f.input :name, label: "Prénom" %>
+    <%= f.input :age %>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit "Ajouter un dresseur", class: "btn btn-primary" %>
+  <% end %>
+  
+</div>

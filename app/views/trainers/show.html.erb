@@ -1,11 +1,13 @@
 <div class="container-fluid my-3">
-  <%= link_to "← Trainers", trainers_path %>
-  <h1 class="my-3"><%= @trainer.name %> is going to catch 'em all!</h1>
+  <%= link_to "← Dresseurs", trainers_path %>
+  <h1 class="my-3"><%= @trainer.name %> va tous les attraper !</h1>
   <div class="grid-two">
     <div class="left-content">
-      <%= render @trainer %>
+      <div class="sticky-top mt-3">
+        <%= render @trainer %>
+      </div>
     </div>
-    <div class="right-content">
+    <div class="right-content mt-3">
       <!-- DISPLAY POKEMONS -->
       <%# @trainer.pokeballs.each do |pokeball| %>
         <!-- <div class="pokemon-card"> -->
@@ -16,7 +18,7 @@
         </div> -->
       <%# end %> 
 
-      <h2><%= @trainer.name %> has caught <%= @pokemons.count %> pokemons.</h2>
+      <h2><%= @trainer.name %> a attrapé <%= @pokemons.count %> pokemons.</h2>
       <div class="grid-two">
         <% @pokemons.each do |pokemon| %>
           <div class="pokemon-card">
@@ -25,7 +27,7 @@
               <h2><%= pokemon.name %></h2>
             <% end %>
             <p><%= pokemon.element_type %></p>
-            <p>Caught on <%= pokemon.pokeball.caught_on.strftime("%-d %b %Y") %> at <%= pokemon.pokeball.location %></p>
+            <p>Attrapé le <%= pokemon.pokeball.caught_on.strftime("%-d %b %Y") %> à <%= pokemon.pokeball.location %></p>
           </div>
         <% end %>
       </div>
