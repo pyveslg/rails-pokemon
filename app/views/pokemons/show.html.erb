@@ -12,12 +12,18 @@
       </div>
     </div>
     <div class="right-content">
-      <%= simple_form_for [@pokemon, Pokeball.new ] do |f| %>
-        <%= f.association :trainer %>
-        <%= f.input :location %>
-        <%= f.input :caught_on %>
-        <%= f.submit "Catch!", class: "btn btn-primary" %>
+      
+      <% if @pokemon.pokeball.nil? %>
+        <%= simple_form_for [@pokemon, Pokeball.new ] do |f| %>
+          <%= f.association :trainer %>
+          <%= f.input :location %>
+          <%= f.input :caught_on %>
+          <%= f.submit "Catch!", class: "btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <p><%= @pokemon.name %> has already been caught by <%= link_to @pokemon.trainer.name, trainer_path(@pokemon.trainer) %></p>
       <% end %>
+      
       
     </div>
   </div>

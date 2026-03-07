@@ -3,7 +3,32 @@
   <h1 class="my-3"><%= @trainer.name %> is going to catch 'em all!</h1>
   <div class="grid-two">
     <div class="left-content">
-      <%= render "trainer", trainer: @trainer %>
+      <%= render @trainer %>
+    </div>
+    <div class="right-content">
+      <!-- DISPLAY POKEMONS -->
+      <%# @trainer.pokeballs.each do |pokeball| %>
+        <!-- <div class="pokemon-card"> -->
+          <%#= cl_image_tag pokeball.pokemon.photo.key %>
+          <!-- <h2><%#= pokeball.pokemon.name %></h2>
+          <p><%#= pokeball.pokemon.element_type %></p>
+          <p>Caught on <%#= pokeball.caught_on %> at <%#= pokeball.location %></p>
+        </div> -->
+      <%# end %> 
+
+      <h2><%= @trainer.name %> has caught <%= @pokemons.count %> pokemons.</h2>
+      <div class="grid-two">
+        <% @pokemons.each do |pokemon| %>
+          <div class="pokemon-card">
+            <%= link_to pokemon_path(pokemon) do %>
+              <%= cl_image_tag pokemon.photo.key %>
+              <h2><%= pokemon.name %></h2>
+            <% end %>
+            <p><%= pokemon.element_type %></p>
+            <p>Caught on <%= pokemon.pokeball.caught_on.strftime("%-d %b %Y") %> at <%= pokemon.pokeball.location %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@
   <div class="trainers">
     <% @trainers.each do |trainer| %>
       <%= link_to trainer_path(trainer), class: "text-decoration-none" do %>
-        <%= render "trainer", trainer: trainer %>
+        <%= render trainer %>
       <% end %>
     <% end %>
     
